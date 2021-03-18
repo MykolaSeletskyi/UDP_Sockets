@@ -1,0 +1,40 @@
+﻿<Window x:Class="_02_ChatClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_02_ChatClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Closed="Window_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <Label FontWeight="Bold">Message:</Label>
+            <Button Click="Button_Click" Width="100" DockPanel.Dock="Right" Background="IndianRed">Leave</Button>
+            <Button Click="Button_Click_1" Width="100" DockPanel.Dock="Right" Background="LightGreen">Join</Button>
+            <Button Click="Button_Click_2" Width="100" DockPanel.Dock="Right" Background="DarkCyan">Send</Button>
+            <TextBox FontSize="16" VerticalContentAlignment="Center" Name="txtBox"></TextBox>
+        </DockPanel>
+        <ListBox Grid.Row="1" Name="list" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
+                            <Run Text="from ip: "/>
+                            <Run Text="{Binding IPAddress}"/> 
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="{Binding Time}"/>
+                            <Run Text=" : "/>
+                            <Run FontSize="16" FontWeight="Bold" Text="{Binding Text}"/>  
+                        </TextBlock>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
