@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
             <Label FontWeight="Bold">Message:</Label>
-            <Button Click="Button_Click" Width="100" DockPanel.Dock="Right" Background="IndianRed">Leave</Button>
-            <Button Click="Button_Click_1" Width="100" DockPanel.Dock="Right" Background="LightGreen">Join</Button>
-            <Button Click="Button_Click_2" Width="100" DockPanel.Dock="Right" Background="DarkCyan">Send</Button>
+            <Button Click="LeaveClick" Width="100" DockPanel.Dock="Right" Background="IndianRed">Leave</Button>
+            <Button Click="JoinClick" Width="100" DockPanel.Dock="Right" Background="LightGreen">Join</Button>
+            <Button Click="SendClick" Width="100" DockPanel.Dock="Right" Background="DarkCyan">Send</Button>
             <TextBox FontSize="16" VerticalContentAlignment="Center" Name="txtBox"></TextBox>
         </DockPanel>
         <ListBox Grid.Row="1" Name="list" HorizontalContentAlignment="Stretch">

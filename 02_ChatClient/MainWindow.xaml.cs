@@ -36,23 +36,9 @@ namespace _02_ChatClient
         string MyName = "Andriy";
         public MainWindow()
         {
-            InitializeComponent();
-
-            bool UniqueNickname = false;
-            while (!UniqueNickname)
-            {
-                Nickname nickname = new Nickname();
-                if (nickname.ShowDialog() == true)
-                {
-
-                }
-                else
-                {
-                    MessageBox.Show("Is not a unique nickname");
-                }
-            }
+            InitializeComponent();           
             list.ItemsSource = messages;
-            Task.Run(() => Listen());
+
         }
 
         private void Listen()
@@ -115,17 +101,38 @@ namespace _02_ChatClient
             client.Send(data, data.Length, iPEndPoint);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LeaveClick(object sender, RoutedEventArgs e)
         {
             SendMessage("#2");
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void JoinClick(object sender, RoutedEventArgs e)
         {
-            SendMessage($"#1{MyName}");
+            bool UniqueNickname = false;
+            while (!UniqueNickname)
+            {
+                Nickname nickname = new Nickname();
+                nickname.ShowDialog();
+                SendMessage($"#1{MyName}");
+                IPEndPoint iPEndPoint = null;
+                byte[] data = client.Receive(ref iPEndPoint);
+                string msg = Encoding.UTF8.GetString(data);
+                if (msg== "NotUnique#")
+                {
+                    MessageBox.Show("Is not a unique nickname");
+                    continue;
+                }
+                messages.Add(new MessageInfo()
+                {
+                    Time = DateTime.Now.ToShortTimeString(),
+                    Text = msg,
+                    Type = MessageInfo.TypeMessage.InfoMessage
+                });
+            }
+            Task.Run(() => Listen());
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void SendClick(object sender, RoutedEventArgs e)
         {
             SendMessage(txtBox.Text);
         }

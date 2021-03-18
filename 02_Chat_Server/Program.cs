@@ -35,6 +35,16 @@ namespace _02_Chat_Server
                     bool isSuccesful;
                     if (msg.Substring(0,2) == "#1")
                     {
+                        try
+                        {
+                            members.Values.Single(i => i == msg.Substring(2));
+                            string str = $"NotUnique#";
+                            byte[] strByteArr = Encoding.UTF8.GetBytes(str.ToString());
+                            server.Send(strByteArr, strByteArr.Length, groupEP);
+                            continue;
+                        }
+                        catch (InvalidOperationException) { }
+
                         isSuccesful = AddMember(groupEP, msg.Substring(2));
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"Request to connect from {groupEP} at {DateTime.Now.ToShortTimeString()}\n");
