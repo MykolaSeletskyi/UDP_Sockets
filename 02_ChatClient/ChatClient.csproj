@@ -59,6 +59,7 @@
       <DependentUpon>Nickname.xaml</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.6.1.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\02_ChatClient_Content.g.cs" />
     <Compile Include="obj\Debug\02_ChatClient_Content.g.i.cs" />
     <Compile Include="obj\Debug\App.g.cs" />
     <Compile Include="obj\Debug\App.g.i.cs" />
@@ -109,8 +110,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="bin\Debug\02_ChatClient.exe.config" />
-    <None Include="ChatClient_netzb1rq_wpftmp.csproj" />
-    <None Include="ChatClient_x11vtzev_wpftmp.csproj" />
     <None Include="obj\Debug\02_ChatClient.csproj.CoreCompileInputs.cache" />
     <None Include="obj\Debug\02_ChatClient.csproj.GenerateResource.cache" />
     <None Include="obj\Debug\02_ChatClient.csprojAssemblyReference.cache" />
@@ -136,12 +135,15 @@
   <ItemGroup>
     <Content Include="bin\Debug\02_ChatClient.exe" />
     <Content Include="bin\Debug\02_ChatClient.pdb" />
-    <Resource Include="obj\Debug\02_ChatClient.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\02_ChatClient.exe" />
     <Content Include="obj\Debug\02_ChatClient.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="obj\Debug\02_ChatClient.csproj.FileListAbsolute.txt" />
     <Resource Include="obj\Debug\ChatClient.csproj.FileListAbsolute.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Release\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
