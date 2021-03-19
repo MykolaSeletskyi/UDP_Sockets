@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,15 +31,16 @@ namespace _02_ChatClient
         // порт віддаленого хоста
         private static int remotePort = 8080;
         // створення об'єкту UdpClient для відправки даних
-        UdpClient client = new UdpClient(0);
-
+        UdpClient client;
         ObservableCollection<MessageInfo> messages = new ObservableCollection<MessageInfo>();
-        string MyName = "Andriy";
+        string MyName = null;
+        Thread ThreadListen;
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
             list.ItemsSource = messages;
-
+            ThreadListen = new Thread(() => Listen());
+            ThreadListen.IsBackground = true;
         }
 
         private void Listen()
@@ -73,7 +75,7 @@ namespace _02_ChatClient
                               {
                                   typeMessage = MessageInfo.TypeMessage.TextMessage;
                               }
-                              text = msg.Substring(msg.IndexOf('#')+1);
+                              text = msg.Substring(msg.IndexOf('#') + 1);
                           }
                           messages.Insert(0, new MessageInfo()
                           {
@@ -94,53 +96,79 @@ namespace _02_ChatClient
         private void SendMessage(string msg)
         {
             if (string.IsNullOrWhiteSpace(msg)) return;
-
             IPEndPoint iPEndPoint = new IPEndPoint(IPAddress.Parse(remoteIPAddress), remotePort);
-
             byte[] data = Encoding.UTF8.GetBytes(msg);
             client.Send(data, data.Length, iPEndPoint);
         }
 
+        [Obsolete]
         private void LeaveClick(object sender, RoutedEventArgs e)
         {
-            SendMessage("#2");
+            if (client != null)
+            {
+                ThreadListen.Suspend();
+                SendMessage("#2");
+                client.Close();
+            }
         }
 
+        [Obsolete]
         private void JoinClick(object sender, RoutedEventArgs e)
         {
+            client = new UdpClient();
             bool UniqueNickname = false;
             while (!UniqueNickname)
             {
                 Nickname nickname = new Nickname();
-                nickname.ShowDialog();
-                SendMessage($"#1{MyName}");
+                if (nickname.ShowDialog() != true)
+                {
+                    return;
+                }
+                SendMessage($"#1{nickname.GetNickname}");
                 IPEndPoint iPEndPoint = null;
                 byte[] data = client.Receive(ref iPEndPoint);
                 string msg = Encoding.UTF8.GetString(data);
-                if (msg== "NotUnique#")
+                if (msg == "NotUnique#")
                 {
                     MessageBox.Show("Is not a unique nickname");
                     continue;
                 }
+                UniqueNickname = true;
+                MyName = nickname.GetNickname;
                 messages.Add(new MessageInfo()
                 {
                     Time = DateTime.Now.ToShortTimeString(),
-                    Text = msg,
+                    Text = msg.Substring(1),
                     Type = MessageInfo.TypeMessage.InfoMessage
                 });
             }
-            Task.Run(() => Listen());
+            if (ThreadListen.ThreadState == (ThreadState.Background | ThreadState.Unstarted))
+            {
+                ThreadListen.Start();
+            }
+            else
+            {
+                ThreadListen.Resume();
+            }
         }
 
         private void SendClick(object sender, RoutedEventArgs e)
         {
-            SendMessage(txtBox.Text);
+            if (client != null)
+            {
+                SendMessage(txtBox.Text);
+                txtBox.Text = "";
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            SendMessage("#2");
-            client.Close();
+            if (client != null)
+            {
+                ThreadListen.Abort();
+                SendMessage("#2");
+                client.Close();
+            }
         }
     }
 }

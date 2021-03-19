@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_02_ChatClient"
         mc:Ignorable="d"
-        Title="Nickname" Height="450" Width="800">
+        Title="Nickname" Height="140" Width="250">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock>Enter nickname:</TextBlock>
-        <TextBox Name="TextBox" Grid.Row="1" MinWidth="250">Nickname</TextBox>
+        <TextBox Name="TextBox" Grid.Row="1" Width="210"></TextBox>
         <WrapPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,15,0,0">
             <Button IsDefault="True" Click="Accept_Click" MinWidth="60" Margin="0,0,10,0">Save</Button>
         </WrapPanel>

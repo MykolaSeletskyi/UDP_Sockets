@@ -7,6 +7,43 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Closed="Window_Closed">
+    <Window.Resources>
+
+        <DataTemplate x:Key="MyMessage">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Text}" Foreground="#258325" FontSize="20"/>
+                <TextBlock Text="{Binding Time}" Foreground="#303030" FontSize="12" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="InfoMessage">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Text}" Foreground="#000000" FontSize="20" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Time}" Foreground="#303030" FontSize="12" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TextMessage">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="{Binding  StringFormat={} {0}:  ,Path=User}" Foreground="#303030" FontSize="15" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Text}" Foreground="#000D5F" FontSize="20" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Time}" Foreground="#303030" FontSize="12" VerticalAlignment="Bottom"/>
+            </StackPanel>
+        </DataTemplate>
+        <Style TargetType="{x:Type ListBoxItem}" x:Key="ContainerStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="MyMessage">
+                    <Setter Property="ContentTemplate" Value="{StaticResource MyMessage}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="InfoMessage">
+                    <Setter Property="ContentTemplate" Value="{StaticResource InfoMessage}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="TextMessage">
+                    <Setter Property="ContentTemplate" Value="{StaticResource TextMessage}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -19,22 +56,10 @@
             <Button Click="SendClick" Width="100" DockPanel.Dock="Right" Background="DarkCyan">Send</Button>
             <TextBox FontSize="16" VerticalContentAlignment="Center" Name="txtBox"></TextBox>
         </DockPanel>
-        <ListBox Grid.Row="1" Name="list" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
-                            <Run Text="from ip: "/>
-                            <Run Text="{Binding IPAddress}"/> 
-                        </TextBlock>
-                        <TextBlock>
-                            <Run Text="{Binding Time}"/>
-                            <Run Text=" : "/>
-                            <Run FontSize="16" FontWeight="Bold" Text="{Binding Text}"/>  
-                        </TextBlock>
-                    </DockPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <ListBox Grid.Row="1" Name="list" HorizontalContentAlignment="Stretch" ItemContainerStyle="{StaticResource ContainerStyle}">
+
         </ListBox>
+
+
     </Grid>
 </Window>

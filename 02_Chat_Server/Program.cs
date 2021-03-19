@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 namespace _02_Chat_Server
 {
     class Program
@@ -100,12 +100,13 @@ namespace _02_Chat_Server
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine($"Message from {groupEP} at {DateTime.Now.ToShortTimeString()}: {msg}\n");
-                        string str = $"{members[groupEP]}#{msg.Substring(2)}";
+                        string str = $"{members[groupEP]}#{msg}";
                         byte[] strByteArr = Encoding.UTF8.GetBytes(str.ToString());
                         foreach (var m in members)
                         {
                             try
                             {
+                                Console.WriteLine(str);
                                 server.Send(strByteArr, strByteArr.Length, m.Key);
                             }
                             catch (Exception ex)
@@ -118,9 +119,9 @@ namespace _02_Chat_Server
                     Console.ResetColor();
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.ToString());
+                MessageBox.Show(ex.Message);
             }
             finally
             {

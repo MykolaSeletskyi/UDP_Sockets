@@ -58,6 +58,17 @@
     <Compile Include="Nickname.xaml.cs">
       <DependentUpon>Nickname.xaml</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.6.1.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\02_ChatClient_Content.g.i.cs" />
+    <Compile Include="obj\Debug\App.g.cs" />
+    <Compile Include="obj\Debug\App.g.i.cs" />
+    <Compile Include="obj\Debug\MainWindow.g.cs" />
+    <Compile Include="obj\Debug\MainWindow.g.i.cs" />
+    <Compile Include="obj\Debug\Nickname.g.cs" />
+    <Compile Include="obj\Debug\Nickname.g.i.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Utils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -91,10 +102,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="obj\Debug\02_ChatClient.g.resources" />
+    <EmbeddedResource Include="obj\Debug\_02_ChatClient.Properties.Resources.resources" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\02_ChatClient.exe.config" />
+    <None Include="ChatClient_netzb1rq_wpftmp.csproj" />
+    <None Include="ChatClient_x11vtzev_wpftmp.csproj" />
+    <None Include="obj\Debug\02_ChatClient.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\02_ChatClient.csproj.GenerateResource.cache" />
+    <None Include="obj\Debug\02_ChatClient.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\02_ChatClient_MarkupCompile.cache" />
+    <None Include="obj\Debug\02_ChatClient_MarkupCompile.i.cache" />
+    <None Include="obj\Debug\02_ChatClient_MarkupCompile.i.lref" />
+    <None Include="obj\Debug\02_ChatClient_MarkupCompile.lref" />
+    <None Include="obj\Debug\ChatClient.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\ChatClient.csproj.GenerateResource.cache" />
+    <None Include="obj\Debug\ChatClient.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\MainWindow.baml" />
+    <None Include="obj\Debug\Nickname.baml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,6 +132,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\02_ChatClient.exe" />
+    <Content Include="bin\Debug\02_ChatClient.pdb" />
+    <Resource Include="obj\Debug\02_ChatClient.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\02_ChatClient.exe" />
+    <Content Include="obj\Debug\02_ChatClient.pdb" />
+    <Resource Include="obj\Debug\ChatClient.csproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
